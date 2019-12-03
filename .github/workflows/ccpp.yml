@@ -4,9 +4,21 @@ on: [push]
 
 jobs:
   build:
-    runs-on: [ubuntu-latest, macOS-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macOS-latest, windows-latest]
     steps:
     - uses: actions/checkout@v1
+    - name: Install Linux dependencies
+      if: matrix.os == 'ubuntu-latest'
+      run: sudo apt-get install cmake ninja
+    - name: Install macOS dependencies
+      if: matrix.os == 'macOS-latest'
+      run: brew install cmake ninja
+    - name: Install Windows dependencies
+      if: matrix.os == 'windows-latest'
+      run: choco install cmake ninja
     - name: Configure
       run: mkdir build && cd build && cmake -G Ninja ..
     - name: Compile
