@@ -4,14 +4,10 @@ on: [push]
 
 jobs:
   build:
-
-    runs-on: ubuntu-latest
-    
+    runs-on: [ubuntu-latest, macOS-latest, windows-latest]
     steps:
     - uses: actions/checkout@v1
-    - name: Create build directory
-      run: mkdir build 
-    - name: Run CMake
-      run: cd build && cmake -G Ninja ..
-    - name: Run Ninja
+    - name: Configure
+      run: mkdir build && cd build && cmake -G Ninja ..
+    - name: Compile
       run: ninja
