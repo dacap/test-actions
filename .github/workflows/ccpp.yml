@@ -13,10 +13,10 @@ jobs:
     - uses: seanmiddleditch/gha-setup-ninja@master
     - name: Configure
       run: |
-      mkdir build
-      cd build
-      cmake -G Ninja ..
+        mkdir build
+        cd build
+        cmake -G Ninja ..
     - name: Compile
       run: |
-      cd build
-      ninja
+        cd build
+        ninja
