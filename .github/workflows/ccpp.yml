@@ -12,6 +12,11 @@ jobs:
     - uses: actions/checkout@v1
     - uses: seanmiddleditch/gha-setup-ninja@master
     - name: Configure
-      run: mkdir build && cd build && cmake -G Ninja ..
+      run: |
+      mkdir build
+      cd build
+      cmake -G Ninja ..
     - name: Compile
-      run: cd build && ninja
+      run: |
+      cd build
+      ninja
