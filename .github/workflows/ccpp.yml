@@ -10,16 +10,8 @@ jobs:
         os: [ubuntu-latest, macOS-latest, windows-latest]
     steps:
     - uses: actions/checkout@v1
-    - name: Install Linux dependencies
-      if: matrix.os == 'ubuntu-latest'
-      run: sudo apt-get install cmake ninja
-    - name: Install macOS dependencies
-      if: matrix.os == 'macOS-latest'
-      run: brew install cmake ninja
-    - name: Install Windows dependencies
-      if: matrix.os == 'windows-latest'
-      run: choco install cmake ninja
+    - uses: seanmiddleditch/gha-setup-ninja@master
     - name: Configure
       run: mkdir build && cd build && cmake -G Ninja ..
     - name: Compile
-      run: ninja
+      run: cd build && ninja
